@@ -20,7 +20,7 @@
       .doc table th,.doc table td{border:1px solid var(--border); padding:8px}
       .doc img{max-width:100%; height:auto}
       .doc details{background:#0b1020; border:1px solid #0f1630; padding:10px 12px; border-radius:8px}
-  .topbar{position: sticky; top:0; z-index: 20; background: rgba(17,24,39,.8); border-bottom:1px solid var(--border); -webkit-backdrop-filter: saturate(180%) blur(10px); backdrop-filter: saturate(180%) blur(10px)}
+  .topbar{position: fixed; left:0; right:0; top:0; z-index: 20; background: rgba(17,24,39,.8); border-bottom:1px solid var(--border); -webkit-backdrop-filter: saturate(180%) blur(10px); backdrop-filter: saturate(180%) blur(10px)}
       .topbar-inner{max-width:980px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; justify-content:space-between}
       .topbar a{color:#e5e7eb; text-decoration:none}
       .repo-link{color: var(--accent-2)}
@@ -28,6 +28,9 @@
   .topbar[data-scroll="unpinned"]{transform: translateY(-100%)}
   .topbar[data-scroll="pinned"]{transform: translateY(0)}
       .topbar-actions{display:flex; gap:10px; align-items:center}
+
+  /* Compensação do header fixo para o conteúdo não ficar coberto */
+  body{ padding-top: 62px; }
 
       /* Layout com TOC lateral */
       .layout{display:grid; grid-template-columns: 260px 1fr; gap:24px; align-items:start}
@@ -147,7 +150,16 @@ fn();
 
 ### Tabelas (com alinhamento)
 
-```
+Tabela renderizada:
+
+| Coluna | Nº | Valor |
+|:------ |:-:| -----:|
+| A      | 1 |  10.0 |
+| B      | 2 |  20.5 |
+
+Código (Markdown):
+
+```markdown
 | Coluna | Nº | Valor |
 |:------ |:-:| -----:|
 | A      | 1 |  10.0 |
@@ -239,7 +251,18 @@ Exemplos:
 
 ### Tabela de comandos
 
-```
+Tabela renderizada:
+
+| Ação            | Comando       |
+|-----------------|---------------|
+| Instalar deps   | npm install   |
+| Dev server      | npm run dev   |
+| Testes          | npm test      |
+| Build produção  | npm run build |
+
+Código (Markdown):
+
+```markdown
 | Ação            | Comando                 |
 |-----------------|-------------------------|
 | Instalar deps   | npm install             |
@@ -250,7 +273,17 @@ Exemplos:
 
 ### Tabela de variáveis `.env`
 
-```
+Tabela renderizada:
+
+| Variável           | Obrigatória | Exemplo                 | Descrição             |
+|--------------------|:----------:|-------------------------|-----------------------|
+| API_BASE_URL       |    ✅       | https://api.exemplo.com | URL da API            |
+| DATABASE_URL       |    ✅       | postgres://…            | Conexão do banco      |
+| SENTRY_DSN         |    ❌       | https://…               | Rastreamento de erros |
+
+Código (Markdown):
+
+```markdown
 | Variável           | Obrigatória | Exemplo                 | Descrição                   |
 |--------------------|:----------:|-------------------------|-----------------------------|
 | API_BASE_URL       |    ✅       | https://api.exemplo.com | URL da API                  |
@@ -260,7 +293,17 @@ Exemplos:
 
 ### Tabela de compatibilidade
 
-```
+Tabela renderizada:
+
+| Node | Suportado |
+|-----:|:---------:|
+| 20   |    ✅      |
+| 18   |    ✅      |
+| 16   |    ❌      |
+
+Código (Markdown):
+
+```markdown
 | Node | Suportado |
 |-----:|:---------:|
 | 20   |    ✅      |
@@ -393,10 +436,22 @@ python -m src.pipeline --steps all
 ```
 
 ## Métricas
+
+Tabela renderizada:
+
 | Métrica | Valor |
 |--------:|------:|
 | AUC     | 0.92  |
 | F1      | 0.87  |
+
+Código (Markdown):
+
+```markdown
+| Métrica | Valor |
+|--------:|------:|
+| AUC     | 0.92  |
+| F1      | 0.87  |
+```
 
 ## Licença
 CC-BY-4.0
