@@ -54,6 +54,34 @@
         .toc{display:none; position: fixed; left:0; right:0; top:58px; bottom:0; z-index:40; border-radius:0; border-left:none; border-right:none; border-bottom:none; padding:12px 16px}
         .toc.open{display:block}
       }
+
+      /* Footer profissional */
+      .site-footer{border-top:1px solid var(--border); margin-top:32px; padding:28px 0 20px; color:var(--muted)}
+      .footer-grid{display:grid; grid-template-columns: 1.5fr 1fr; gap:24px; align-items:start}
+      .footer-brand h3{margin:0 0 8px}
+      .footer-cta{display:flex; gap:10px; margin-top:12px}
+      .btn{display:inline-block; padding:8px 12px; border:1px solid var(--border); border-radius:8px; color:#e5e7eb; text-decoration:none}
+      .btn-accent{background: var(--accent-2); border-color: transparent; color:#0b1020}
+      .btn:hover{filter: brightness(1.08)}
+      .contact-list{list-style:none; margin:0 0 12px; padding:0; display:grid; gap:6px}
+      .contact-list li{display:flex; gap:8px; align-items:center; color:#cbd5e1}
+      .contact-link{color:#cbd5e1; text-decoration:none}
+      .contact-link:hover{text-decoration:underline}
+      .contact-form{background: var(--panel); border:1px solid var(--border); border-radius:12px; padding:12px}
+      .contact-form .grid-2{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+      .contact-form label{display:grid; gap:6px; color:#e5e7eb}
+      .contact-form input,.contact-form textarea{background:#0b1020; border:1px solid #0f1630; border-radius:8px; padding:10px 12px; color:#e5e7eb}
+      .contact-form input:focus,.contact-form textarea:focus{outline:2px solid var(--accent-2); outline-offset:1px}
+      .form-actions{display:flex; align-items:center; gap:12px; margin-top:10px}
+      .form-hint{color:#94a3b8}
+      .form-status{margin-top:8px}
+      .footer-bottom{display:flex; justify-content:space-between; gap:12px; align-items:center; border-top:1px solid var(--border); margin-top:20px; padding-top:16px}
+      .donate-note{margin:0}
+      @media (max-width: 900px){
+        .footer-grid{grid-template-columns: 1fr}
+        .contact-form .grid-2{grid-template-columns: 1fr}
+        .footer-bottom{flex-direction:column; align-items:flex-start}
+      }
     </style>
   </head>
   <body>
@@ -650,9 +678,58 @@ Mantenha curto no começo, profundo por links, e sempre **executável**.
       </script>
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer" data-email="">
       <div class="doc-container">
-        <p>© <span id="year"></span> Guia README 2025 · <a class="repo-link" target="_blank" rel="noopener" href="https://github.com/gasparfranciscogulungo/estudo_readme/tree/master">Repositório</a></p>
+        <div class="footer-grid">
+          <section class="footer-brand">
+            <h3>Guia README 2025</h3>
+            <p>Estamos construindo materiais práticos e de alta qualidade para ajudar devs a documentar melhor seus projetos. Cada contribuição acelera esse impacto.</p>
+            <div class="footer-cta">
+              <a class="btn btn-accent" target="_blank" rel="noopener" href="https://github.com/sponsors/gasparfranciscogulungo">Apoie no GitHub Sponsors</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://github.com/gasparfranciscogulungo/estudo_readme/tree/master">Ver Repositório</a>
+            </div>
+          </section>
+
+          <section class="footer-contact">
+            <h4>Contato</h4>
+            <ul class="contact-list">
+              <li>
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 13.065 2.4 6h19.2L12 13.065ZM12 15 2 8v10h20V8l-10 7Z"/></svg>
+                <span>Email: configure no rodapé</span>
+              </li>
+              <li>
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 .5a12 12 0 1 0 12 12A12.013 12.013 0 0 0 12 .5Zm1 17.5h-2v-6h2Zm0-8h-2V8h2Z"/></svg>
+                <a class="contact-link" target="_blank" rel="noopener" href="https://github.com/gasparfranciscogulungo">GitHub @gasparfranciscogulungo</a>
+              </li>
+            </ul>
+
+            <form id="contact-form" class="contact-form" data-recipient="">
+              <div class="grid-2">
+                <label>
+                  <span>Nome</span>
+                  <input type="text" name="name" autocomplete="name" required />
+                </label>
+                <label>
+                  <span>Seu email</span>
+                  <input type="email" name="email" autocomplete="email" required />
+                </label>
+              </div>
+              <label>
+                <span>Mensagem</span>
+                <textarea name="message" rows="4" required></textarea>
+              </label>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-accent">Enviar mensagem</button>
+                <small class="form-hint">Abriremos seu cliente de e-mail (mailto) para envio por Gmail/Outlook.</small>
+              </div>
+              <p id="form-status" class="form-status" aria-live="polite"></p>
+            </form>
+          </section>
+        </div>
+        <div class="footer-bottom">
+          <p>© <span id="year"></span> Guia README 2025 · <a class="repo-link" target="_blank" rel="noopener" href="https://github.com/gasparfranciscogulungo/estudo_readme/tree/master">Repositório</a></p>
+          <p class="donate-note">“Se este guia te ajudou, considere apoiar: assim conseguimos publicar mais conteúdo útil para a comunidade.”</p>
+        </div>
       </div>
     </footer>
   </body>

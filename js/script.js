@@ -19,6 +19,25 @@ document.addEventListener('click', async (e) => {
 document.addEventListener('DOMContentLoaded', () => {
 	const y = document.getElementById('year');
 	if (y) y.textContent = new Date().getFullYear();
+
+	// Envio do formulário do rodapé via mailto (abre cliente de e-mail)
+	const form = document.getElementById('contact-form');
+	if (form) {
+		form.addEventListener('submit', (e) => {
+			e.preventDefault();
+			const fd = new FormData(form);
+			const name = (fd.get('name') || '').toString();
+			const from = (fd.get('email') || '').toString();
+			const message = (fd.get('message') || '').toString();
+			const recipient = form.getAttribute('data-recipient') || 'contato@example.com';
+			const subject = encodeURIComponent(`[Guia README 2025] Mensagem de ${name}`);
+			const body = encodeURIComponent(`Nome: ${name}\nEmail: ${from}\n\nMensagem:\n${message}`);
+			const mailto = `mailto:${recipient}?subject=${subject}&body=${body}`;
+			window.location.href = mailto;
+			const status = document.getElementById('form-status');
+			if (status) status.textContent = 'Abrindo seu cliente de e-mail…';
+		});
+	}
 });
 
 // Menu mobile: abrir/fechar

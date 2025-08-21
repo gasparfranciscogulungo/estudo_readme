@@ -149,12 +149,7 @@ main {
 	filter: brightness(1.08);
 }
 
-.site-footer {
-	border-top: 1px solid var(--border);
-	margin-top: 32px;
-	padding: 18px 0;
-	color: var(--muted);
-}
+/* .site-footer base movido para estilos do index.html para evitar duplicação/choque */
 
 @media (max-width: 720px) {
 	.nav-toggle {
@@ -293,3 +288,26 @@ main .doc img { height: auto; }
 	body { font-size: clamp(14px, 3.5vw, 16px); }
 	main .doc { border-radius: 10px; }
 }
+
+/* --- Responsivo extra e correções sem alterar HTML/JS --- */
+/* Ajuste do topo fixo em diferentes alturas (evita sobreposição do conteúdo) */
+body { padding-top: clamp(56px, 9vw, 80px) !important; }
+
+@media (max-width: 900px) {
+	/* Topbar mais compacta no mobile */
+	.topbar-inner { gap: 8px !important; flex-wrap: wrap !important; }
+	.brand { font-size: 14px !important; }
+	.toc-toggle { padding: 6px 8px !important; font-size: 12px !important; }
+	.repo-link { font-size: 12px !important; }
+
+	/* Footer: botões e layout confortáveis */
+	.footer-cta { flex-wrap: wrap !important; }
+	.footer-bottom { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
+}
+
+@media (max-width: 480px) {
+	.btn { width: 100%; text-align: center; }
+}
+
+/* Nota de doação não quebrar layout em telas estreitas */
+.site-footer .donate-note { overflow-wrap: anywhere; word-break: break-word; }
