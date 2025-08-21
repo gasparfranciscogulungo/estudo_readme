@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Guia Profissional de README.md</title>
+		<meta name="description" content="Página educativa que explica como criar READMEs profissionais para projetos no GitHub, com exemplos, boas práticas e modelos." />
+		<link rel="stylesheet" href="./css/style.css" />
+		<script defer src="./js/script.js"></script>
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="container header-inner">
+				<h1>Guia Profissional de README.md</h1>
+				<nav aria-label="principal" class="site-nav">
+					<a href="#introducao">Introdução</a>
+					<a href="#estrutura">Estrutura</a>
+					<a href="#boas-praticas">Boas práticas</a>
+					<a href="#exemplos">Exemplos</a>
+					<a href="#publicacao">GitHub Pages</a>
+				</nav>
+			</div>
+		</header>
+
+		<main class="container">
+			<section id="introducao" class="card">
+				<h2>O que é um README e por que importa?</h2>
+				<p>
+					O arquivo <code>README.md</code> é a porta de entrada do seu projeto. Ele ajuda
+					pessoas a entenderem rapidamente o propósito, como usar, instalar, contribuir e onde
+					encontrar mais informações. No GitHub, ele aparece automaticamente na página inicial
+					do repositório.
+				</p>
+			</section>
+
+			<section id="estrutura" class="card">
+				<h2>Estrutura essencial de um README</h2>
+				<p>Um esqueleto profissional e direto ao ponto:</p>
+				<div class="code-block">
+					<button class="copy-btn" aria-label="copiar código" title="Copiar">Copiar</button>
+					<pre><code># Título do Projeto
+Descrição curta e objetiva do que o projeto faz.
+
+## Demonstração
+[Demo ao vivo](https://seu-usuario.github.io/seu-repo/) (se aplicável)
+
+## Recursos
+- Ponto 1
+- Ponto 2
+
+## Instalação
+1. Pré-requisitos
+2. Passos de instalação
+
+## Uso
+Comandos básicos, exemplos ou prints.
+
+## Configuração (opcional)
+Variáveis de ambiente, chaves etc.
+
+## Testes
+Como executar testes.
+
+## Roadmap (opcional)
+Próximas funcionalidades.
+
+## Contribuição
+Como abrir issues e PRs.
+
+## Licença
+Tipo de licença e arquivo LICENSE.
+
+## Créditos
+Autores e referências.
+</code></pre>
+				</div>
+
+				<h3>Seções úteis adicionais</h3>
+				<ul>
+					<li>Badges (status de build, versão, licença).</li>
+					<li>FAQ, Suporte e Contato.</li>
+					<li>Arquitetura e Decisões (ADR) para projetos maiores.</li>
+				</ul>
+			</section>
+
+			<section id="boas-praticas" class="card">
+				<h2>Boas práticas</h2>
+				<ul class="checklist">
+					<li>Comece com uma descrição clara em 1–2 frases.</li>
+					<li>Mostre primeiro o valor (GIF/print/links de demo).</li>
+					<li>Inclua passos de instalação e uso reproduzíveis.</li>
+					<li>Padronize títulos e a ordem das seções.</li>
+					<li>Exemplos de comandos em blocos de código com linguagem.</li>
+					<li>Links internos (índice) e externos (docs, issues).</li>
+					<li>Política de contribuição e licença explícitas.</li>
+					<li>Mantenha o README curto; empurre detalhes para /docs.</li>
+				</ul>
+
+				<h3>Badges e tabelas</h3>
+				<p>Badges resumem status do projeto:</p>
+				<div class="code-block">
+					<button class="copy-btn" aria-label="copiar código" title="Copiar">Copiar</button>
+					<pre><code>![CI](https://img.shields.io/badge/build-passing-brightgreen)
+![Licença](https://img.shields.io/badge/license-MIT-blue)
+![Stars](https://img.shields.io/github/stars/usuario/repositorio)
+</code></pre>
+				</div>
+
+				<p>Tabelas ajudam a comparar informações:</p>
+				<div class="code-block">
+					<button class="copy-btn" aria-label="copiar código" title="Copiar">Copiar</button>
+					<pre><code>| Recurso      | Suporte |
+|-------------|:-------:|
+| Windows     |   ✅    |
+| macOS       |   ✅    |
+| Linux       |   ✅    |
+</code></pre>
+				</div>
+			</section>
+
+			<section id="exemplos" class="card">
+				<h2>Exemplos e modelos prontos</h2>
+				<p>Use, adapte e publique:</p>
+				<ul>
+					<li><a href="./exemplos/README-basico.md">README básico</a></li>
+					<li><a href="./exemplos/README-avancado.md">README avançado</a></li>
+					<li><a href="./exemplos/README-template.md">README template (para copiar)</a></li>
+				</ul>
+				<p>Aplicações e casos de uso: <a href="./docs/aplicacoes-readme.md">onde um README faz diferença</a>.</p>
+			</section>
+
+			<section id="publicacao" class="card">
+				<h2>Publicação no GitHub Pages</h2>
+				<ol>
+					<li>Crie um repositório no GitHub e faça push deste projeto.</li>
+					<li>No GitHub, vá em Settings → Pages.</li>
+					<li>Em Branch, selecione <strong>main</strong> e a pasta <strong>root</strong>.</li>
+					<li>Salve. A URL será algo como <code>https://seu-usuario.github.io/seu-repo/</code>.</li>
+				</ol>
+				<p>Tutorial detalhado está no <a href="./README.md">README principal</a>.</p>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="container">
+				<p>© <span id="year"></span> Guia de README · Feito com HTML, CSS e JS</p>
+			</div>
+		</footer>
+	</body>
+	</html>
