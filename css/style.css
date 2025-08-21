@@ -23,6 +23,7 @@ body {
 	background: var(--bg);
 	color: var(--text);
 	line-height: 1.6;
+	overflow-x: hidden;
 }
 
 .container {
@@ -244,4 +245,51 @@ main {
 
 .site-header[data-scroll="pinned"] {
 	transform: translateY(0);
+}
+
+/* --- Responsividade do conteúdo gerado em Markdown (.doc) --- */
+/* Evitar overflow horizontal por blocos de código longos */
+main .doc pre {
+	max-width: 100% !important;
+	overflow: auto !important;
+}
+
+main .doc pre code {
+	white-space: pre-wrap !important;
+	word-break: break-word;
+	overflow-wrap: anywhere;
+}
+
+/* Quebra de código inline longo */
+main .doc code {
+	word-break: break-word;
+	overflow-wrap: anywhere;
+}
+
+/* Tabelas roláveis em telas pequenas */
+main .doc table {
+	display: block !important;
+	max-width: 100% !important;
+	overflow-x: auto !important;
+	/* manter colapso de borda herdado pela regra inline do index */
+}
+
+/* Células: permitem quebra quando necessário */
+main .doc th,
+main .doc td {
+	white-space: nowrap;
+}
+
+/* Imagens já possuem max-width:100% no index; manter altura auto */
+main .doc img { height: auto; }
+
+/* Ajustes de espaçamento tipografia em telas menores */
+@media (max-width: 900px) {
+	main .doc-container { padding: 12px; }
+	main .doc { padding: 16px; }
+}
+
+@media (max-width: 600px) {
+	body { font-size: clamp(14px, 3.5vw, 16px); }
+	main .doc { border-radius: 10px; }
 }
