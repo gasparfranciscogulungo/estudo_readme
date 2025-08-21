@@ -1,150 +1,604 @@
 <!doctype html>
 <html lang="pt-br">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Guia Profissional de README.md</title>
-		<meta name="description" content="Página educativa que explica como criar READMEs profissionais para projetos no GitHub, com exemplos, boas práticas e modelos." />
-		<link rel="stylesheet" href="./css/style.css" />
-		<script defer src="./js/script.js"></script>
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="container header-inner">
-				<h1>Guia Profissional de README.md</h1>
-				<nav aria-label="principal" class="site-nav">
-					<a href="#introducao">Introdução</a>
-					<a href="#estrutura">Estrutura</a>
-					<a href="#boas-praticas">Boas práticas</a>
-					<a href="#exemplos">Exemplos</a>
-					<a href="#publicacao">GitHub Pages</a>
-				</nav>
-			</div>
-		</header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Guia Definitivo de README.md – 2025</title>
+    <meta name="description" content="Guia prático e opinativo para dominar README.md: boas práticas, atalhos, templates e checklists. Versão 2025." />
+    <link rel="stylesheet" href="./css/style.css" />
+    <!-- Renderer de Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script defer src="./js/script.js"></script>
+    <style>
+      .doc-container{max-width: 980px; margin: 0 auto; padding: 16px}
+      .doc{background: var(--panel); border:1px solid var(--border); border-radius: 12px; padding: 20px}
+      .doc h1{margin-top:0}
+      .doc pre code{white-space: pre}
+      .doc blockquote{border-left: 3px solid var(--accent-2); padding-left: 12px; color: var(--muted)}
+      .doc hr{border: none; border-top: 1px solid var(--border); margin: 24px 0}
+      .doc table{width:100%; border-collapse: collapse}
+      .doc table th,.doc table td{border:1px solid var(--border); padding:8px}
+      .doc img{max-width:100%; height:auto}
+      .doc details{background:#0b1020; border:1px solid #0f1630; padding:10px 12px; border-radius:8px}
+  .topbar{position: sticky; top:0; z-index: 20; background: rgba(17,24,39,.8); border-bottom:1px solid var(--border); -webkit-backdrop-filter: saturate(180%) blur(10px); backdrop-filter: saturate(180%) blur(10px)}
+      .topbar-inner{max-width:980px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; justify-content:space-between}
+      .topbar a{color:#e5e7eb; text-decoration:none}
+      .repo-link{color: var(--accent-2)}
+  .topbar{transition: transform .28s ease}
+  .topbar[data-scroll="unpinned"]{transform: translateY(-100%)}
+  .topbar[data-scroll="pinned"]{transform: translateY(0)}
+      .topbar-actions{display:flex; gap:10px; align-items:center}
 
-		<main class="container">
-			<section id="introducao" class="card">
-				<h2>O que é um README e por que importa?</h2>
-				<p>
-					O arquivo <code>README.md</code> é a porta de entrada do seu projeto. Ele ajuda
-					pessoas a entenderem rapidamente o propósito, como usar, instalar, contribuir e onde
-					encontrar mais informações. No GitHub, ele aparece automaticamente na página inicial
-					do repositório.
-				</p>
-			</section>
+      /* Layout com TOC lateral */
+      .layout{display:grid; grid-template-columns: 260px 1fr; gap:24px; align-items:start}
+      .toc{position: sticky; top:64px; max-height: calc(100vh - 90px); overflow:auto; background: var(--panel); border:1px solid var(--border); border-radius:12px; padding:12px}
+      .toc .toc-title{font-weight:700; margin:4px 8px 8px; color:#e5e7eb}
+      .toc-list{list-style:none; margin:0; padding:0}
+      .toc-item{margin:4px 0}
+      .toc-item.level-2{padding-left:4px}
+      .toc-item.level-3{padding-left:16px}
+      .toc a{display:block; padding:6px 8px; color: var(--muted); text-decoration:none; border-radius:6px}
+      .toc a:hover{background:#0b1220; color:#fff}
+      .toc a.active{background:#0b1220; color:#fff}
 
-			<section id="estrutura" class="card">
-				<h2>Estrutura essencial de um README</h2>
-				<p>Um esqueleto profissional e direto ao ponto:</p>
-				<div class="code-block">
-					<button class="copy-btn" aria-label="copiar código" title="Copiar">Copiar</button>
-					<pre><code># Título do Projeto
-Descrição curta e objetiva do que o projeto faz.
+      .toc-toggle{background:transparent; color:#e5e7eb; border:1px solid var(--border); padding:6px 10px; border-radius:8px; cursor:pointer}
+      .toc-toggle:hover{background:#0b1220}
 
-## Demonstração
-[Demo ao vivo](https://seu-usuario.github.io/seu-repo/) (se aplicável)
+      html{scroll-behavior:smooth}
 
-## Recursos
-- Ponto 1
-- Ponto 2
+      @media (max-width: 900px){
+        .layout{grid-template-columns: 1fr}
+        .toc{display:none; position: fixed; left:0; right:0; top:58px; bottom:0; z-index:40; border-radius:0; border-left:none; border-right:none; border-bottom:none; padding:12px 16px}
+        .toc.open{display:block}
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar" data-scroll="pinned">
+      <div class="topbar-inner">
+  <a href="#" class="brand">Guia README 2025</a>
+  <div class="topbar-actions">
+          <button id="toc-toggle" class="toc-toggle" aria-controls="toc" aria-expanded="false" aria-label="Abrir sumário">Sumário</button>
+          <a class="repo-link" target="_blank" rel="noopener" href="https://github.com/gasparfranciscogulungo/estudo_readme/tree/master">Abrir no GitHub ↗</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="doc-container">
+      <div class="layout">
+  <nav id="toc" class="toc" aria-label="Sumário"></nav>
+        <article id="doc" class="doc"></article>
+      </div>
+      <!-- Conteúdo markdown bruto (fonte) -->
+      <script type="text/markdown" id="md-source">
+# Guia Definitivo de README.md (do básico ao avançado) – 2025
+
+> Um manual prático e opinativo para você dominar README.md em qualquer projeto (app, lib, API, data science, monorepo). Inclui boas práticas, atalhos, templates prontos e checklists.
+
+---
+
+## 1) Conceitos rápidos
+
+* **README.md** é a porta de entrada do seu repositório. Ele explica *o que é*, *por que existe* e *como usar*.
+* Escrito em **Markdown** (renderizado como HTML pelo GitHub/GitLab/Bitbucket/VS Code).
+* **Objetivo**: reduzir fricção. Quem chega deve conseguir instalar/rodar/usar **sem te chamar**.
+
+**Quando é “bom”?**
+
+* Clareza imediata do propósito (1º parágrafo).
+* Passo‑a‑passo de instalação/uso que funciona.
+* Print/GIF curto que prova valor.
+* Limpo, curto onde pode ser curto e profundo onde precisa ser profundo.
+
+---
+
+## 2) Sintaxe essencial de Markdown (cola rápida)
+
+### Títulos
+
+```bash
+# H1
+## H2
+### H3
+#### H4
+```
+
+### Parágrafos / Quebra de linha
+
+* Linha em branco separa parágrafos.
+* Use dois espaços no fim da linha para *quebra suave*.
+
+### Ênfase
+
+```
+**negrito**  *itálico*  ~~riscado~~  `código inline`
+```
+
+### Listas
+
+```
+- Item
+  - Subitem
+1. Primeiro
+2. Segundo
+- [ ] Checklist
+- [x] Feito
+```
+
+### Links e imagens
+
+```
+[Texto](https://exemplo.com)
+![Legenda da imagem](./docs/screenshot.png)
+```
+
+### Blocos de código com destaque
+
+````
+```bash
+npm install && npm run dev
+```
+
+```js
+import { fn } from "lib";
+fn();
+```
+````
+
+### Tabelas (com alinhamento)
+
+```
+| Coluna | Nº | Valor |
+|:------ |:-:| -----:|
+| A      | 1 |  10.0 |
+| B      | 2 |  20.5 |
+```
+
+### Citações e detalhes colapsáveis
+
+```
+> Dica: mantenha exemplos curtos.
+
+<details>
+  <summary>Ver mais</summary>
+  Conteúdo escondido…
+</details>
+```
+
+### Mostrar Markdown como **exemplo** (sem ser interpretado)
+
+````
+```markdown
+# Título (H1)
+## Subtítulo (H2)
+```
+````
+
+> **Regra de ouro**: abriu com `**feche** com` na mesma contagem.
+
+---
+
+## 3) Estrutura padrão (seções recomendadas)
+
+> Use como guia; adapte ao tipo de projeto.
+
+1. **Capa** (nome, 1–2 linhas de valor, badges essenciais)
+2. **Demonstração** (GIF/print curto ou link para demo)
+3. **Instalação** (pré‑requisitos + comandos que funcionam do zero)
+4. **Uso rápido** (Hello World / exemplo mínimo)
+5. **Configuração** (.env, chaves, variáveis)
+6. **Documentação** (links para docs, API, wiki, examples)
+7. **Roadmap / Status** (o que está pronto, o que vem)
+8. **Contribuição** (como abrir issue/PR, padrão de commits)
+9. **Suporte / Contato** (onde tirar dúvidas)
+10. **Licença** (MIT/Apache/GPL…)
+11. **Créditos** (autores, inspiração, referências)
+
+> **Regra 80/20**: o leitor deve sair do README já executando algo útil.
+
+---
+
+## 4) Badges (selos) prontos para colar
+
+> Substitua `usuario/repositorio` e personalize.
+
+```
+![Build](https://img.shields.io/github/actions/workflow/status/usuario/repositorio/ci.yml)
+![Version](https://img.shields.io/github/v/release/usuario/repositorio)
+![License](https://img.shields.io/github/license/usuario/repositorio)
+![Issues](https://img.shields.io/github/issues/usuario/repositorio)
+![PRs](https://img.shields.io/github/issues-pr/usuario/repositorio)
+![Last commit](https://img.shields.io/github/last-commit/usuario/repositorio)
+![Repo size](https://img.shields.io/github/repo-size/usuario/repositorio)
+```
+
+Dicas:
+
+* Use **poucos** selos (3–6). Excesso polui.
+* Prefira o que **reduz incerteza** (build, versão, licença).
+
+---
+
+## 5) Imagens, GIFs e vídeo
+
+* **Tamanho**: otimize (TinyPNG/TinyJPG). GIFs curtos (3–8s) explicam rápido.
+* **Caminhos relativos**: `./docs/screen.png` evita links quebrados.
+* **Alternativo**: use `<picture>`/`<img>` com `width` para lado a lado ou centralização.
+
+Exemplos:
+
+```
+<p align="center">
+  <img src="./docs/hero.png" width="700" alt="Demonstração" />
+</p>
+```
+
+---
+
+## 6) Tabelas úteis no README (receitas)
+
+### Tabela de comandos
+
+```
+| Ação            | Comando                 |
+|-----------------|-------------------------|
+| Instalar deps   | npm install             |
+| Dev server      | npm run dev             |
+| Testes          | npm test                |
+| Build produção  | npm run build           |
+```
+
+### Tabela de variáveis `.env`
+
+```
+| Variável           | Obrigatória | Exemplo                 | Descrição                   |
+|--------------------|:----------:|-------------------------|-----------------------------|
+| API_BASE_URL       |    ✅       | https://api.exemplo.com | URL da API                  |
+| DATABASE_URL       |    ✅       | postgres://…            | Conexão do banco            |
+| SENTRY_DSN         |    ❌       | https://…               | Rastreamento de erros       |
+```
+
+### Tabela de compatibilidade
+
+```
+| Node | Suportado |
+|-----:|:---------:|
+| 20   |    ✅      |
+| 18   |    ✅      |
+| 16   |    ❌      |
+```
+
+---
+
+## 7) Três templates prontos (copie e cole)
+
+### 7.1 Template — **App/CLI**
+
+````
+# Nome do Projeto 🚀
+
+Breve frase de valor (o que resolve, para quem).
+
+![Build](https://img.shields.io/github/actions/workflow/status/usuario/repositorio/ci.yml)
+![Version](https://img.shields.io/github/v/release/usuario/repositorio)
+![License](https://img.shields.io/github/license/usuario/repositorio)
+
+## ✨ Demonstração
+
+- Vídeo/Live Demo: https://…
+- GIF rápido:
+
+<p align="center">
+  <img src="./docs/demo.gif" width="720" alt="Demonstração" />
+</p>
+
+## 📦 Requisitos
+- Node 18+
+- Docker (opcional)
+
+## 🔧 Instalação
+```bash
+npm install
+```
+
+## 🚀 Uso rápido
+```bash
+npm run dev
+```
+
+## ⚙️ Configuração
+Crie `.env` baseado em `.env.example`.
+
+## 📚 Documentação
+- Guia rápido: ./docs/quickstart.md
+- API: ./docs/api.md
+
+## 🗺️ Roadmap
+- [ ] Auth
+- [ ] Dashboard
+- [ ] Modo offline
+
+## 🤝 Contribuição
+Siga o [CONTRIBUTING.md](./CONTRIBUTING.md) e Commits Semânticos.
+
+## 🛡️ Licença
+MIT © Seu Nome
+````
+
+### 7.2 Template — **Biblioteca/SDK**
+
+````
+# Nome da Biblioteca 📦
+
+Descrição clara do problema que resolve + snippet mínimo.
+
+```ts
+import { createClient } from "@org/pacote";
+const client = createClient({ apiKey: process.env.API_KEY });
+const data = await client.get("/items");
+```
 
 ## Instalação
-1. Pré-requisitos
-2. Passos de instalação
+```bash
+npm i @org/pacote
+```
 
 ## Uso
-Comandos básicos, exemplos ou prints.
+```ts
+import { fn } from "@org/pacote";
+fn("hello");
+```
 
-## Configuração (opcional)
-Variáveis de ambiente, chaves etc.
+## API
+- `createClient(opts)` → Client
+- `client.get(path)` → Promise
 
-## Testes
-Como executar testes.
-
-## Roadmap (opcional)
-Próximas funcionalidades.
-
-## Contribuição
-Como abrir issues e PRs.
+## Suporte a runtimes
+| Runtime | Suporte |
+|-------:|:-------:|
+| Node   |   ✅    |
+| Deno   |   ✅    |
+| Bun    |   ✅    |
 
 ## Licença
-Tipo de licença e arquivo LICENSE.
+Apache-2.0
+````
 
-## Créditos
-Autores e referências.
-</code></pre>
-				</div>
+### 7.3 Template — **Data Science/Research**
 
-				<h3>Seções úteis adicionais</h3>
-				<ul>
-					<li>Badges (status de build, versão, licença).</li>
-					<li>FAQ, Suporte e Contato.</li>
-					<li>Arquitetura e Decisões (ADR) para projetos maiores.</li>
-				</ul>
-			</section>
+````
+# Projeto de Análise de Dados 📊
 
-			<section id="boas-praticas" class="card">
-				<h2>Boas práticas</h2>
-				<ul class="checklist">
-					<li>Comece com uma descrição clara em 1–2 frases.</li>
-					<li>Mostre primeiro o valor (GIF/print/links de demo).</li>
-					<li>Inclua passos de instalação e uso reproduzíveis.</li>
-					<li>Padronize títulos e a ordem das seções.</li>
-					<li>Exemplos de comandos em blocos de código com linguagem.</li>
-					<li>Links internos (índice) e externos (docs, issues).</li>
-					<li>Política de contribuição e licença explícitas.</li>
-					<li>Mantenha o README curto; empurre detalhes para /docs.</li>
-				</ul>
+Resumo do objetivo (dataset, pergunta, método, métrica principal).
 
-				<h3>Badges e tabelas</h3>
-				<p>Badges resumem status do projeto:</p>
-				<div class="code-block">
-					<button class="copy-btn" aria-label="copiar código" title="Copiar">Copiar</button>
-					<pre><code>![CI](https://img.shields.io/badge/build-passing-brightgreen)
-![Licença](https://img.shields.io/badge/license-MIT-blue)
-![Stars](https://img.shields.io/github/stars/usuario/repositorio)
-</code></pre>
-				</div>
+## Estrutura
+```
+.
+├── data/           # dados brutos e processados
+├── notebooks/      # Jupyter/Colab
+├── src/            # código reutilizável
+├── reports/        # figuras e relatórios
+└── README.md
+```
 
-				<p>Tabelas ajudam a comparar informações:</p>
-				<div class="code-block">
-					<button class="copy-btn" aria-label="copiar código" title="Copiar">Copiar</button>
-					<pre><code>| Recurso      | Suporte |
-|-------------|:-------:|
-| Windows     |   ✅    |
-| macOS       |   ✅    |
-| Linux       |   ✅    |
-</code></pre>
-				</div>
-			</section>
+## Ambiente
+```bash
+conda env create -f environment.yml
+conda activate projeto
+```
 
-			<section id="exemplos" class="card">
-				<h2>Exemplos e modelos prontos</h2>
-				<p>Use, adapte e publique:</p>
-				<ul>
-					<li><a href="./exemplos/README-basico.md">README básico</a></li>
-					<li><a href="./exemplos/README-avancado.md">README avançado</a></li>
-					<li><a href="./exemplos/README-template.md">README template (para copiar)</a></li>
-				</ul>
-				<p>Aplicações e casos de uso: <a href="./docs/aplicacoes-readme.md">onde um README faz diferença</a>.</p>
-			</section>
+## Reproduzir resultados
+```bash
+python -m src.pipeline --steps all
+```
 
-			<section id="publicacao" class="card">
-				<h2>Publicação no GitHub Pages</h2>
-				<ol>
-					<li>Crie um repositório no GitHub e faça push deste projeto.</li>
-					<li>No GitHub, vá em Settings → Pages.</li>
-					<li>Em Branch, selecione <strong>main</strong> e a pasta <strong>root</strong>.</li>
-					<li>Salve. A URL será algo como <code>https://seu-usuario.github.io/seu-repo/</code>.</li>
-				</ol>
-				<p>Tutorial detalhado está no <a href="./README.md">README principal</a>.</p>
-			</section>
-		</main>
+## Métricas
+| Métrica | Valor |
+|--------:|------:|
+| AUC     | 0.92  |
+| F1      | 0.87  |
 
-		<footer class="site-footer">
-			<div class="container">
-				<p>© <span id="year"></span> Guia de README · Feito com HTML, CSS e JS</p>
-			</div>
-		</footer>
-	</body>
-	</html>
+## Licença
+CC-BY-4.0
+````
+
+---
+
+## 8) Seções opcionais que elevam seu README
+
+* **FAQ**: antecipe dúvidas comuns.
+* **Arquitetura**: diagrama simples (Mermaid) ajuda muito.
+* **Benchmark**: tabelas de comparação (com critérios claros).
+* **Limitações**: seja honesto, aumenta confiança.
+* **Segurança**: link para `SECURITY.md` com política de reporte.
+* **Privacidade**: como lida com dados (se aplicável).
+
+### Exemplo de diagrama (Mermaid – suportado no GitHub)
+
+````
+```mermaid
+flowchart LR
+  A[Cliente] --> B(API)
+  B --> C[(DB)]
+  B --> D[Serviço X]
+```
+````
+
+---
+
+## 9) Multi‑idioma (i18n) de README
+
+* Crie arquivos: `README.md` (pt) · `README.en.md` · `README.es.md`.
+* Adicione links cruzados no topo:
+
+```
+**Línguas**: [PT](./README.md) · [EN](./README.en.md) · [ES](./README.es.md)
+```
+
+* Evite conteúdo desatualizado entre versões (escolha 1 como fonte e traduza a partir dela).
+
+---
+
+## 10) Integração com o ecossistema do repo
+
+* **CONTRIBUTING.md**: como rodar testes, padrões de branch, revisão.
+* **CODE_OF_CONDUCT.md**: padrão de convivência (ex.: Contributor Covenant).
+* **SECURITY.md**: como reportar vulnerabilidades (e-mail, SLA de resposta).
+* **LICENSE**: tipo e texto da licença.
+* **CHANGELOG.md**: mudanças por versão (Keep a Changelog + SemVer).
+* **.github/ISSUE_TEMPLATE/** & **PULL_REQUEST_TEMPLATE.md**: guias para issues/PRs.
+
+> **Dica**: Linke esses arquivos no README para reduzir atrito de contribuição.
+
+---
+
+## 11) Padrões e automação (qualidade contínua)
+
+* **markdownlint**: lint para Markdown.
+* **prettier**: formatação consistente (com plugin Markdown).
+* **ci**: job que builda docs, roda lints e links‑checker.
+
+### Exemplo de configuração rápida (npm scripts)
+
+```
+"scripts": {
+  "lint:md": "markdownlint '**/*.md' --ignore node_modules",
+  "fmt": "prettier --write '**/*.{md,mdx,json,yml,yaml,js,ts,tsx}'"
+}
+```
+
+---
+
+## 12) SEO/GitHub Discovery
+
+* **Descrição curta** do repositório (Settings → About).
+* **Topics** relevantes (palavras‑chave).
+* **Título do README** com a *keyword* principal.
+* Primeiro parágrafo **explica o valor** (aparece no preview).
+
+---
+
+## 13) Erros comuns (e como evitar)
+
+* **Excesso de badges e gifs** → ruído visual.
+* **Instalação incompleta** → passos faltando quebram a adoção.
+* **Exemplos longos** → mova para `examples/` e linke.
+* **Não fechar bloco de código** → metade do arquivo vira “exemplo”.
+* **Screenshots externos** → links quebram; use assets locais.
+
+---
+
+## 14) Guia de escrita (clareza e tom)
+
+* Escreva no **imperativo curto**: “Instale”, “Execute”.
+* Uma ideia por parágrafo.
+* Comece com **resultado** antes dos detalhes.
+* Prefira **tabelas** para informações matriciais.
+* Use **emojis com moderação** para navegação visual.
+
+**Exemplo** (ruim → bom):
+
+* Ruim: “Nosso projeto incrível…
+* Bom: “CLI para converter CSV em JSON em 1 comando.”
+
+---
+
+## 15) Checklist final de qualidade (QA do README)
+
+* [ ] Título e 1ª frase explicam o valor.
+* [ ] `Instalação` e `Uso rápido` funcionam em máquina limpa.
+* [ ] 1 GIF/print mostra o resultado.
+* [ ] Links (internos/externos) funcionam.
+* [ ] Licença explícita.
+* [ ] Roadmap curto com expectativas.
+* [ ] Tabelas de comandos e variáveis `.env` existem (se aplicável).
+* [ ] Badge de build/versão presente (se aplicável).
+
+---
+
+## 16) Copilot: como “mostrar tudo” com prompts úteis
+
+> O Copilot responde melhor quando você fornece **estrutura**, **exemplos curtos** e **intenção**.
+
+### Prompt para gerar README inicial
+
+```
+Crie um README.md para um projeto {tipo: app web Next.js/Tailwind}.
+Inclua: capa com 3 badges (build, versão, licença), GIF de demo,
+instalação (Node 18+), uso rápido (npm run dev), configuração (.env),
+tabela de comandos, tabela de variáveis, seção de contribuição, licença MIT.
+Use tom direto e exemplos mínimos que executem.
+```
+
+### Prompt para refinar seção específica
+
+```
+Revise a seção “Instalação” para máquinas limpas (Windows, Mac, Linux),
+listando pré‑requisitos e erros comuns com soluções curtas.
+```
+
+### Prompt para criar variantes por público
+
+```
+Gere uma versão curta do README para usuários finais e outra para contribuidores,
+resumindo o essencial em até 120 linhas cada.
+```
+
+---
+
+## 17) Mini‑templates extra (blocos soltos)
+
+### Sumário automático (links internos)
+
+```
+## 📑 Sumário
+- [Demonstração](#-demonstração)
+- [Instalação](#-instalação)
+- [Uso](#-uso-rápido)
+- [Configuração](#-configuração)
+- [Documentação](#-documentação)
+- [Contribuição](#-contribuição)
+- [Licença](#-licença)
+```
+
+### Avisos/Alertas simples
+
+```
+> ⚠️ Requer Node 18+ e Docker para features X.
+```
+
+### Bloco “Como citar” (papers/datasets)
+
+```
+## 📣 Citação
+Se usar este trabalho, cite:
+```
+
+@misc{seu2025,
+ title={Projeto X},
+ author={Seu Nome},
+ year={2025},
+ url={[https://github.com/usuario/repositorio}](https://github.com/usuario/repositorio})
+}
+
+```
+
+---
+
+## 18) Conclusão
+
+README excelente é **produto**, não apenas “documento”. Ele guia, convence e reduz suporte. 
+
+Mantenha curto no começo, profundo por links, e sempre **executável**.
+
+> Dica final: toda feature relevante deve vir com um **patch do README**. Sem doc, não está pronto.
+      </script>
+    </main>
+
+    <footer class="site-footer">
+      <div class="doc-container">
+        <p>© <span id="year"></span> Guia README 2025 · <a class="repo-link" target="_blank" rel="noopener" href="https://github.com/gasparfranciscogulungo/estudo_readme/tree/master">Repositório</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
